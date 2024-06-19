@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maschinen Vermietung</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDJS3FamxfMtJRUPFcZOfY3esmk3N7stiw",
+          authDomain: "industriegebiet.firebaseapp.com",
+          databaseURL: "https://industriegebiet-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "industriegebiet",
+          storageBucket: "industriegebiet.appspot.com",
+          messagingSenderId: "136611695529",
+          appId: "1:136611695529:web:1017b8f1447205f226d2b8"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+      </script>
+</head>
+<body>
+    <header>
+        <h1>Maschinen Vermietung</h1>
+    </header>
+    <main>
+        <section id="machines-list">
+            <h2>Verfügbare Maschinen</h2>
+            <ul id="machine-items">
+                <!-- Maschinen werden hier dynamisch eingefügt -->
+            </ul>
+        </section>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

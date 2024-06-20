@@ -3,13 +3,14 @@ import { getDatabase, ref, set, onValue } from 'firebase/database';
 
 // Firebase-Konfiguration (ersetze mit deinen eigenen Daten)
 const firebaseConfig = {
-    apiKey: "AIzaSyDJS3FamxfMtJRUPFcZOfY3esmk3N7stiw",
-    authDomain: "industriegebiet.firebaseapp.com",
-    projectId: "industriegebiet",
-    storageBucket: "industriegebiet.appspot.com",
-    messagingSenderId: "136611695529",
-    appId: "1:136611695529:web:e72789d466425eef26d2b8"
-  };
+  apiKey: "AIzaSyDJS3FamxfMtJRUPFcZOfY3esmk3N7stiw",
+  authDomain: "industriegebiet.firebaseapp.com",
+  databaseURL: "https://industriegebiet-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "industriegebiet",
+  storageBucket: "industriegebiet.appspot.com",
+  messagingSenderId: "136611695529",
+  appId: "1:136611695529:web:e72789d466425eef26d2b8"
+};
 
 // Firebase initialisieren
 firebase.initializeApp(firebaseConfig);

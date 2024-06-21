@@ -1,44 +1,39 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maschinen Vermietung</title>
-    <link rel="stylesheet" href="styles.css">
+<title>Maschinenvermietung</title>
+<link rel="stylesheet" href="styles.css"> <!-- Verweis auf die CSS-Datei -->
 </head>
 <body>
-    <header>
-        <h1>Maschinen Vermietung</h1>
-    </header>
-    <main>
-        <section id="machines-list">
-            <h2>Verfügbare Maschinen</h2>
-            <ul id="machine-items">
-                <!-- Maschinen werden hier dynamisch eingefügt -->
-            </ul>
-        </section>
-        <section id="machine-form">
-            <h2>Maschine hinzufügen/bearbeiten</h2>
-            <form id="edit-machine-form">
-                <input type="hidden" id="machine-id">
-                <label for="machine-name">Name der Maschine:</label>
-                <input type="text" id="machine-name" required>
-                <label for="machine-status">Status:</label>
-                <select id="machine-status" required>
-                    <option value="frei">Frei</option>
-                    <option value="vermietet">Vermietet</option>
-                </select>
-                <label for="machine-renter">Vermietet an:</label>
-                <input type="text" id="machine-renter">
-                <button type="submit">Speichern</button>
-                <button type="button" id="cancel-edit">Abbrechen</button>
-            </form>
-        </section>
-    </main>
-    <!-- Firebase SDKs von einem CDN laden -->
-    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-database.js"></script>
-    <script src="script.js"></script>
+    <div class="container">
+        <h1>Maschinenvermietung</h1>
+
+        <br>
+        <form id="reviewForm">
+            <input type="hidden" id="hiddenId" />
+    
+            <div class="input-field">
+                <label for="fullName"> Full Name</label>
+                <input type="text" id="fullName" />
+            </div>
+            <br>
+            <div class="input-field">
+                <label for="message"> Review Contens</label>
+                <textarea class="materialize-textarea" id="message"></textarea> 
+            </div>
+            <br>
+    
+            <button class="waves-effect waves-light btn" type="submit"> Add / Update</button>
+        </form>
+    </div>
+   
+
+    <ul id="reviews"></ul>
+
+
+    <!-- Firebase SDKs einbinden -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
-

@@ -1,5 +1,6 @@
 
-
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, set, onValue } from 'firebase/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,10 +14,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
 
-var db = app.database();
+var db = firebase.database();
 var reviews = document.getElementById("reviews");
 var reviewsRef = db.ref("/reviews");
 
@@ -30,6 +32,6 @@ reviewForm.addEventListener("submit", e =>{
     db.ref("reviews/" + id).set ({
         fullName: fullName.value,
         message: message.value,
-        createdAt: app.database.ServerValue.TIMESTAMP
+        createdAt: firebase.database.ServerValue.TIMESTAMP
     })
 })

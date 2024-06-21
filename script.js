@@ -1,4 +1,7 @@
 // Firebase-Konfiguration
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
+import { getDatabase, ref, onValue, update } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js';
+
 const firebaseConfig = {
     apiKey: "AIzaSyDJS3FamxfMtJRUPFcZOfY3esmk3N7stiw",
     authDomain: "industriegebiet.firebaseapp.com",
@@ -10,15 +13,16 @@ const firebaseConfig = {
 };
 
 // Firebase initialisieren
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 // Funktion, um Maschinen aus Firebase abzurufen und anzuzeigen
 function fetchMachines() {
     const machineList = document.getElementById('machine-list');
-    db.ref('machines').once('value', function(snapshot) {
+    const machinesRef = ref(db, 'machines');
+    onValue(machinesRef, (snapshot) => {
         machineList.innerHTML = ''; // Liste leeren
-        snapshot.forEach(function(childSnapshot) {
+        snapshot.forEach((childSnapshot) => {
             const machineId = childSnapshot.key;
             const machineData = childSnapshot.val();
             const { name, status, renter } = machineData; // ES6 Destructuring
@@ -51,11 +55,11 @@ window.changeStatus = (id, currentStatus) => {
 
 // Funktion, um Status in Firebase zu speichern
 window.saveStatus = (id, status, renter) => {
-    db.ref('machines/' + id).update({ status, renter });
+    const machineRef = ref(db, 'machines/' + id);
+    update(machineRef, { status, renter });
     const statusSpan = document.getElementById(`status-${id}`);
     statusSpan.textContent = status === 'frei' ? 'Frei' : 'Vermietet an ' + renter;
 }
 
 // Maschinen bei Seitenaufruf laden
 fetchMachines();
-

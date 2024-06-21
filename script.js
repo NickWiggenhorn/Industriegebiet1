@@ -1,7 +1,4 @@
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, onValue } from 'firebase/database';
-
-// Firebase-Konfiguration (ersetze mit deinen eigenen Daten)
+// Firebase-Konfiguration
 const firebaseConfig = {
     apiKey: "AIzaSyDJS3FamxfMtJRUPFcZOfY3esmk3N7stiw",
     authDomain: "industriegebiet.firebaseapp.com",
@@ -10,83 +7,55 @@ const firebaseConfig = {
     storageBucket: "industriegebiet.appspot.com",
     messagingSenderId: "136611695529",
     appId: "1:136611695529:web:e72789d466425eef26d2b8"
-  };
+};
 
 // Firebase initialisieren
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// Referenz auf die Maschinen-Datenbank
-const machinesRef = db.ref('machines');
+// Funktion, um Maschinen aus Firebase abzurufen und anzuzeigen
+function fetchMachines() {
+    const machineList = document.getElementById('machine-list');
+    db.ref('machines').once('value', function(snapshot) {
+        machineList.innerHTML = ''; // Liste leeren
+        snapshot.forEach(function(childSnapshot) {
+            const machineId = childSnapshot.key;
+            const machineData = childSnapshot.val();
+            const { name, status, renter } = machineData; // ES6 Destructuring
 
-// Maschinenliste DOM-Element
-const machineList = document.getElementById('machine-items');
-
-// Funktion zum Anzeigen der Maschinen in der Liste
-function displayMachines(machines) {
-    machineList.innerHTML = '';
-    machines.forEach((machine) => {
-        const { name, status, renter } = machine;
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <strong>${name}</strong> - Status: ${status === 'frei' ? 'Frei' : 'Vermietet'}${status === 'vermietet' ? ` an ${renter}` : ''}
-        `;
-        machineList.appendChild(li);
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span>${name}</span>
+                <span id="status-${machineId}">${status === 'frei' ? 'Frei' : 'Vermietet an ' + renter}</span>
+                <button onclick="changeStatus('${machineId}', '${status}')">Status ändern</button>
+                <input type="text" id="renter-${machineId}" style="display: none;" placeholder="Mietername">
+            `;
+            machineList.appendChild(li);
+        });
     });
 }
 
-// Daten von Firebase abrufen und anzeigen
-machinesRef.on('value', (snapshot) => {
-    const machinesData = snapshot.val();
-    const machinesArray = machinesData ? Object.values(machinesData) : [];
-    displayMachines(machinesArray);
-});
-
-// Formular zur Bearbeitung/Erstellung von Maschinen
-const editMachineForm = document.getElementById('edit-machine-form');
-
-editMachineForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const machineId = document.getElementById('machine-id').value;
-    const machineName = document.getElementById('machine-name').value;
-    const machineStatus = document.getElementById('machine-status').value;
-    const machineRenter = document.getElementById('machine-renter').value;
-
-    if (machineId) {
-        // Maschine aktualisieren
-        const machineRef = db.ref(`machines/${machineId}`);
-        machineRef.set({
-            name: machineName,
-            status: machineStatus,
-            renter: machineRenter
-        }).then(() => {
-            console.log('Maschine erfolgreich aktualisiert.');
-        }).catch((error) => {
-            console.error('Fehler beim Aktualisieren der Maschine:', error);
-        });
+// Funktion, um Status der Maschine zu ändern
+window.changeStatus = (id, currentStatus) => {
+    const renterInput = document.getElementById(`renter-${id}`);
+    if (currentStatus === 'frei') {
+        const renter = prompt('Bitte geben Sie den Namen des Mieters ein:');
+        if (renter) {
+            saveStatus(id, 'vermietet', renter);
+        }
     } else {
-        // Neue Maschine hinzufügen
-        const newMachineRef = machinesRef.push();
-        newMachineRef.set({
-            name: machineName,
-            status: machineStatus,
-            renter: machineRenter
-        }).then(() => {
-            console.log('Neue Maschine erfolgreich hinzugefügt.');
-        }).catch((error) => {
-            console.error('Fehler beim Hinzufügen der Maschine:', error);
-        });
+        renterInput.style.display = 'none';
+        saveStatus(id, 'frei', '');
     }
+};
 
-    // Formular zurücksetzen
-    editMachineForm.reset();
-    document.getElementById('machine-id').value = '';
-});
+// Funktion, um Status in Firebase zu speichern
+window.saveStatus = (id, status, renter) => {
+    db.ref('machines/' + id).update({ status, renter });
+    const statusSpan = document.getElementById(`status-${id}`);
+    statusSpan.textContent = status === 'frei' ? 'Frei' : 'Vermietet an ' + renter;
+}
 
-// Abbrechen-Button im Formular
-const cancelButton = document.getElementById('cancel-edit');
+// Maschinen bei Seitenaufruf laden
+fetchMachines();
 
-cancelButton.addEventListener('click', () => {
-    editMachineForm.reset();
-    document.getElementById('machine-id').value = '';
-});

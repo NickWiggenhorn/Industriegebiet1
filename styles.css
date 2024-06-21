@@ -25,6 +25,7 @@ h1 {
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 li {
@@ -38,8 +39,34 @@ li {
     align-items: center;
 }
 
-li span {
-    font-size: 1.1rem;
+li div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+li div span, li div button, li div input {
+    flex: 1;
+}
+
+li div span {
+    text-align: left;
+    padding: 0 1rem;
+}
+
+.status-frei {
+    background-color: #4CAF50; /* Grün für frei */
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.status-vermietet {
+    background-color: #f44336; /* Rot für vermietet */
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
 }
 
 button {
@@ -49,6 +76,7 @@ button {
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
+    margin-left: 1rem;
 }
 
 button:hover {
@@ -60,17 +88,10 @@ input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-left: 1rem;
+    display: none;
 }
 
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    background-color: #333;
-    color: white;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-}
+
+
 
 

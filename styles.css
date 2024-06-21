@@ -1,78 +1,17 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1em 0;
-    text-align: center;
-}
-
-main {
     padding: 20px;
 }
-
-section {
-    max-width: 800px;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-#machine-items {
+ul {
     list-style-type: none;
     padding: 0;
 }
-
-.machine-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+button {
+    margin-left: 10px;
 }
 
-.machine-item:last-child {
-    border-bottom: none;
-}
-
-.machine-status {
-    font-weight: bold;
-}
-
-.machine-available {
-    color: green;
-}
-
-.machine-rented {
-    color: red;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-form label {
-    margin-top: 10px;
-}
-
-form input, form select, form button {
-    margin-top: 5px;
-}
-
-form button {
-    margin-top: 10px;
-}
-
-.edit-buttons {
-    display: flex;
-    gap: 10px;
-}

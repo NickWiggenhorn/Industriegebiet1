@@ -16,16 +16,31 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// Maschinen in Abschnitte gruppieren
+const machineCategories = {
+    Minibagger: [],
+    'Minibagger-Anbaugeräte': [],
+    Radlader: [],
+    'Radlader-Anbaugeräte': [],
+    Dumper: [],
+    Rüttelplatten: [],
+    Kleingeräte: []
+};
+
 // Funktion, um Maschinen aus Firebase abzurufen und anzuzeigen
 function fetchMachines() {
-    const machineList = document.getElementById('machine-list');
+    const machineSections = document.getElementById('machine-sections');
     const machinesRef = ref(db, 'machines');
     onValue(machinesRef, (snapshot) => {
-        machineList.innerHTML = ''; // Liste leeren
+        // Maschinenkategorien leeren
+        for (const category in machineCategories) {
+            machineCategories[category] = [];
+        }
+
         snapshot.forEach((childSnapshot) => {
             const machineId = childSnapshot.key;
             const machineData = childSnapshot.val();
-            const { name, status, renter } = machineData;
+            const { name, status, renter, category } = machineData;
 
             const li = document.createElement('li');
             li.innerHTML = `
@@ -36,8 +51,21 @@ function fetchMachines() {
                     <input type="text" id="renter-${machineId}" placeholder="Mietername">
                 </div>
             `;
-            machineList.appendChild(li);
+
+            if (category in machineCategories) {
+                machineCategories[category].push(li);
+            }
         });
+
+        machineSections.innerHTML = ''; // Alle Abschnitte leeren
+        for (const category in machineCategories) {
+            const section = document.createElement('section');
+            section.innerHTML = `<h2>${category}</h2>`;
+            const ul = document.createElement('ul');
+            machineCategories[category].forEach(li => ul.appendChild(li));
+            section.appendChild(ul);
+            machineSections.appendChild(section);
+        }
     });
 }
 
@@ -70,3 +98,4 @@ window.saveStatus = (id, status, renter) => {
 
 // Maschinen bei Seitenaufruf laden
 fetchMachines();
+

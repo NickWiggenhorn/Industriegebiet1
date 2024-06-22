@@ -24,6 +24,8 @@ const machineCategories = {
     'Radlader-Anbaugeräte': [],
     Dumper: [],
     Rüttelplatten: [],
+    Hebebühnen: [],
+    Anhänger: [],
     Kleingeräte: []
 };
 
@@ -98,4 +100,5 @@ window.saveStatus = (id, status, renter) => {
 
 // Maschinen bei Seitenaufruf laden
 fetchMachines();
+
 

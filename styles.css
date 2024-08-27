@@ -51,18 +51,18 @@ li div span, li div button, li div input {
 }
 
 .status {
-    padding: 0.5rem 1rem;
+    padding: 3px 8px;
     border-radius: 4px;
-    color: white;
-    font-weight: bold;
 }
 
 .status-frei {
-    background-color: #4CAF50;
+    background-color: #28a745;
+    color: white;
 }
 
 .status-vermietet {
-    background-color: #FF5733;
+    background-color: #dc3545;
+    color: white;
 }
 
 button {
@@ -119,9 +119,48 @@ section h2 {
     }
 }
 
+/* Bestehende Styles hier */
 
+section h2 {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer; /* Zeigt an, dass die Überschrift klickbar ist */
+}
 
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Anfangs ausgeblendet */
+}
 
+/* Hover-Effekt für die Überschriften */
+section h2:hover {
+    background-color: #45a049;
+}
 
+.renter-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Abstand zwischen den Mietern */
+}
 
+.renter-item span {
+    margin-right: 10px; /* Abstand zwischen Name und Status */
+}
 
+.renter-item button {
+    margin-left: auto; /* Positioniert den Button rechts */
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.renter-item button:hover {
+    background-color: #0056b3;
+}

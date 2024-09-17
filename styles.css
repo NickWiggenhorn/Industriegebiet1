@@ -141,14 +141,8 @@ section h2:hover {
     background-color: #45a049;
 }
 
-.renter-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px; /* Abstand zwischen den Mietern */
-}
-
-.renter-item span {
-    margin-right: 10px; /* Abstand zwischen Name und Status */
+section h2:contains("Container") {
+    background-color: black; /* Container-Kategorie soll schwarz sein */
 }
 
 .renter-item button {
@@ -164,3 +158,109 @@ section h2:hover {
 .renter-item button:hover {
     background-color: #0056b3;
 }
+
+/* Style for date input and status dropdown */
+input[type="date"], select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 1rem;
+    display: none; /* Initially hidden, will be shown when needed */
+}
+
+button.add-transport {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+button.add-transport:hover {
+    background-color: #007BB5;
+}
+
+.renters-container {
+    display: flex;
+    flex-direction: column; /* Elemente untereinander anordnen */
+    gap: 10px; /* optionaler Abstand zwischen den Elementen */
+}
+
+/* Stile für einzelne Mieter-Elemente */
+.renter-item {
+    display: flex;
+    flex-direction: row; /* Name und Status nebeneinander */
+    align-items: center;
+    margin-bottom: 10px; /* Abstand zwischen den Mietern */
+}
+
+.renter-item span {
+    margin-right: 10px; /* Abstand zwischen Name und Status */
+}
+
+input[type="text"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 1rem;
+    display: none; /* Display these only when needed */
+}
+
+/* Hintergrund für Container-Kategorie schwarz */
+section.container-category h2 {
+    background-color: black;
+    color: white;  /* Textfarbe auf weiß setzen */
+}
+
+/* Renters Container hidden by default */
+.renters-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button.toggle-renters {
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+button.toggle-renters:hover {
+    background-color: #0056b3;
+}
+
+button.toggle-renters2 {
+    margin-bottom: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+button.toggle-renters2:hover {
+    background-color: rgb(16, 132, 16);
+}
+
+.renter-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="time"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 1rem;
+    display: none; /* Standardmäßig ausgeblendet */
+}
+
